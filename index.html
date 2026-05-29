@@ -2040,11 +2040,19 @@
 
       /* O Clube */
       #clube { padding: 72px 24px 56px; }
-      .clube-inner { gap: 32px; }
-      .clube-ano { font-size: 64px; }
+      .clube-inner { gap: 24px; }
       .clube-titulo { font-size: 32px; }
       .clube-p { font-size: 15px; }
-      .clube-stats { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+      /* Aside compacto no mobile: esconde decorativos, mantém só stats */
+      .clube-ano { display: none; }
+      .clube-linha { display: none; }
+      .clube-fundador-label { display: none; }
+      .clube-fundador { display: none; }
+      .clube-data { display: none; }
+      .clube-stats { flex-direction: row; flex-wrap: wrap; gap: 20px 32px; padding: 20px 0; border-top: 1px solid rgba(242,237,228,0.12); border-bottom: 1px solid rgba(242,237,228,0.12); }
+      .clube-stat { flex: 1; min-width: 80px; }
+      .stat-num { font-size: 22px; }
+      .stat-label { font-size: 12px; }
       .clube-stat { min-width: 120px; }
 
       /* O que Oferecemos */
