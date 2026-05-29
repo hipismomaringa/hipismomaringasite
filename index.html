@@ -1990,12 +1990,17 @@
 
       /* Hero */
       #hero { min-height: 100svh; padding-top: 80px; }
-      .hero-img-wrap { width: 100%; top: 0; height: 100%; opacity: 0.55; }
+      .hero-img-wrap {
+        width: 100%;
+        top: 80px;
+        height: calc(100% - 80px);
+        opacity: 0.5;
+      }
       .hero-img-fade {
         background:
-          linear-gradient(to right, var(--cream) 0%, var(--cream) 8%, rgba(232,224,208,0.85) 40%, transparent 100%),
-          linear-gradient(to top, var(--cream) 0%, transparent 35%),
-          linear-gradient(to bottom, var(--cream) 0%, transparent 20%);
+          linear-gradient(to right, var(--cream) 0%, var(--cream) 5%, rgba(232,224,208,0.9) 35%, rgba(232,224,208,0.3) 70%, transparent 100%),
+          linear-gradient(to top, var(--cream) 0%, transparent 30%),
+          linear-gradient(to bottom, var(--cream) 0%, transparent 12%);
       }
       .hero-content {
         padding: 0 24px 80px;
@@ -2041,11 +2046,21 @@
       .produto-info { padding: 16px 16px 20px; }
       .produto-nome { font-size: 16px; }
 
-      /* Atletas */
-      #atletas { padding: 64px 24px 56px; }
+      /* Atletas — stack compacto no mobile */
+      #atletas { padding: 64px 24px 56px; overflow: hidden; }
       .atletas-header { margin-bottom: 48px; }
-      .fan-stage { height: 380px; }
-      .fan-card { width: 220px; height: 300px; margin-left: -110px; }
+      .fan-stage {
+        height: calc(72vw * 1.42 + 56px);
+        max-height: 460px;
+        overflow: hidden;
+      }
+      .fan-card {
+        width: 72vw;
+        max-width: 280px;
+        height: calc(72vw * 1.42);
+        max-height: 398px;
+        margin-left: calc(72vw / -2);
+      }
 
       /* Seção separadores */
       .sep-band { padding: 36px 0; }
@@ -2070,10 +2085,9 @@
     @media (max-width: 480px) {
       .hero-title { font-size: clamp(40px, 13vw, 60px); }
       .boutique-grid { grid-template-columns: 1fr; }
-      .fan-card { width: 200px; height: 280px; margin-left: -100px; }
-      .fan-stage { height: 340px; }
       .nav-mobile-link { font-size: 28px; }
       .section-title { font-size: clamp(28px, 8vw, 40px); }
+      .fan-card { width: 78vw; margin-left: calc(78vw / -2); height: calc(78vw * 1.42); }
     }
 
     /* ══════════════════════════════════════════
@@ -2975,10 +2989,14 @@
       }
 
       function layout(dragDx) {
+        const mobile  = window.innerWidth <= 768;
         const cardW   = cards[0] ? cards[0].offsetWidth : CFG.W;
-        const spacing = cardW * (1 - CFG.OVERLAP);
+        const overlap = mobile ? 0.86 : CFG.OVERLAP;
+        const spread  = mobile ? 8   : CFG.SPREAD;
+        const tiltX   = mobile ? 4   : CFG.TILT_X;
+        const spacing = cardW * (1 - overlap);
         const maxOff  = Math.floor(N / 2);
-        const stepDeg = maxOff > 0 ? CFG.SPREAD / maxOff : 0;
+        const stepDeg = maxOff > 0 ? spread / maxOff : 0;
 
         cards.forEach((card, i) => {
           const off = signedOff(i, active);
@@ -2988,11 +3006,11 @@
           const rotZ  = off * stepDeg;
           const tx    = off * spacing + (act && dragging ? dragDx : 0);
           const ty    = abs * 6 - (act ? CFG.LIFT : 0);
-          const scale = act ? CFG.S_ACT : CFG.S_INACT;
-          const rotX  = act ? 0 : CFG.TILT_X;
+          const scale = act ? CFG.S_ACT : (mobile ? 0.92 : CFG.S_INACT);
+          const rotX  = act ? 0 : tiltX;
 
           card.style.zIndex   = String(10 - abs);
-          card.style.opacity  = String(abs > maxOff ? 0 : 1);
+          card.style.opacity  = abs > maxOff ? '0' : mobile && abs > 0 ? '0.55' : '1';
           card.style.transform =
             `translateX(${tx}px) translateY(${ty}px) rotateX(${rotX}deg) rotateZ(${rotZ}deg) scale(${scale})`;
           card.classList.toggle('is-active', act);
