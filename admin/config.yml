@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: pt
+
+media_folder: midia/blog
+public_folder: /midia/blog
+
+collections:
+  - name: posts
+    label: Posts do Blog
+    label_singular: Post
+    folder: posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: Título
+        name: title
+        widget: string
+
+      - label: Data
+        name: date
+        widget: datetime
+        date_format: DD/MM/YYYY
+        time_format: HH:mm
+        format: YYYY-MM-DDTHH:mm:ss.SSSZ
+
+      - label: Descrição
+        name: description
+        widget: text
+        required: false
+        hint: Breve resumo que aparece na lista do blog
+
+      - label: Imagem de capa
+        name: thumbnail
+        widget: image
+        required: false
+        hint: Foto que aparece no card do post
+
+      - label: Conteúdo
+        name: body
+        widget: markdown
