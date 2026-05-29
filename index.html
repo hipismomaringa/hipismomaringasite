@@ -1914,12 +1914,6 @@
       inset: 0;
       z-index: 8900;
       background: var(--cream);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: safe center;
-      gap: 4px;
-      padding: 100px 28px 56px;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       opacity: 0;
@@ -1928,6 +1922,16 @@
       transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     #nav-mobile.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    .nav-mobile-inner {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 28px 56px;
+      gap: 4px;
+    }
 
     .nav-mobile-fechar {
       position: absolute;
@@ -2173,14 +2177,16 @@
     <button class="nav-mobile-fechar" id="nav-mobile-fechar" aria-label="Fechar menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <nav class="nav-mobile-lista">
-      <a href="#clube"      class="nav-mobile-link">O Clube</a>
-      <a href="#oferecemos" class="nav-mobile-link">O que Oferecemos</a>
-      <a href="#boutique"   class="nav-mobile-link">Boutique</a>
-      <a href="#atletas"    class="nav-mobile-link">Atletas</a>
-      <a href="#blog"       class="nav-mobile-link" id="nav-mobile-blog">Blog</a>
-    </nav>
-    <a href="https://wa.me/5544999198845?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20de%20equita%C3%A7%C3%A3o." target="_blank" class="nav-mobile-cta">Aula Experimental</a>
+    <div class="nav-mobile-inner">
+      <nav class="nav-mobile-lista">
+        <a href="#clube"      class="nav-mobile-link">O Clube</a>
+        <a href="#oferecemos" class="nav-mobile-link">O que Oferecemos</a>
+        <a href="#boutique"   class="nav-mobile-link">Boutique</a>
+        <a href="#atletas"    class="nav-mobile-link">Atletas</a>
+        <a href="#blog"       class="nav-mobile-link" id="nav-mobile-blog">Blog</a>
+      </nav>
+      <a href="https://wa.me/5544999198845?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20de%20equita%C3%A7%C3%A3o." target="_blank" class="nav-mobile-cta">Aula Experimental</a>
+    </div>
   </div>
 
   <!-- ══ HERO ══ -->
