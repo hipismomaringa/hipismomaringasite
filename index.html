@@ -1511,6 +1511,7 @@
       justify-content: space-between;
       z-index: 10;
     }
+    .blog-bar-centro { text-align: center; }
     .blog-bar-titulo {
       font-family: 'Playfair Display', serif;
       font-size: 22px;
@@ -1524,6 +1525,24 @@
       color: var(--gold);
       margin-bottom: 4px;
     }
+    .blog-voltar-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-60);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+    .blog-voltar-site:hover { color: var(--green); }
+    .blog-voltar-site svg { width: 14px; height: 14px; flex-shrink: 0; }
     .blog-fechar {
       width: 42px; height: 42px;
       border-radius: 50%;
@@ -2432,7 +2451,11 @@
   <!-- ══ BLOG OVERLAY ══ -->
   <div id="blog-overlay" role="dialog" aria-modal="true" aria-label="Blog">
     <div class="blog-bar">
-      <div>
+      <button class="blog-voltar-site" id="blog-voltar-site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+        Voltar ao site
+      </button>
+      <div class="blog-bar-centro">
         <p class="blog-bar-eyebrow">Hipismo Maringá</p>
         <p class="blog-bar-titulo">Blog</p>
       </div>
@@ -2633,12 +2656,33 @@
       });
 
       // Fechar
-      function fecharBlog() {
+      function fecharBlog(scrollAlvo) {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        if (scrollAlvo) {
+          setTimeout(() => {
+            const el = document.querySelector(scrollAlvo);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 420);
+        }
       }
-      fechar.addEventListener('click', fecharBlog);
+
+      fechar.addEventListener('click', () => fecharBlog());
+      document.getElementById('blog-voltar-site').addEventListener('click', () => fecharBlog());
       document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharBlog(); });
+
+      // Links da nav fecham o overlay e rolam para a seção
+      document.querySelectorAll('.nav-links a:not([href="#blog"])').forEach(link => {
+        link.addEventListener('click', e => {
+          if (overlay.classList.contains('open')) {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              e.preventDefault();
+              fecharBlog(href);
+            }
+          }
+        });
+      });
     })();
 
     // ── Fan carrossel — Atletas ──────────────────────────────
