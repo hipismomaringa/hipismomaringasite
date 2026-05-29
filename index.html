@@ -1788,8 +1788,6 @@
       box-shadow: 0 16px 48px rgba(0,0,0,0.5);
       cursor: pointer;
       transform-origin: center bottom;
-      transform-style: preserve-3d;
-      perspective: 1100px;
       transition:
         transform  0.55s cubic-bezier(0.34, 1.4, 0.64, 1),
         opacity    0.35s ease,
@@ -2017,8 +2015,9 @@
         width: 100%;
         top: 80px;
         height: calc(100% - 80px);
-        opacity: 0.5;
+        opacity: 0.55;
       }
+      .hero-img-wrap img { object-position: 70% center; }
       .hero-img-fade {
         background:
           linear-gradient(to right, var(--cream) 0%, var(--cream) 5%, rgba(232,224,208,0.9) 35%, rgba(232,224,208,0.3) 70%, transparent 100%),
@@ -2041,8 +2040,11 @@
       /* O Clube */
       #clube { padding: 72px 24px 56px; }
       .clube-inner { gap: 24px; }
-      .clube-titulo { font-size: 32px; }
-      .clube-p { font-size: 15px; }
+      .clube-titulo { font-size: 34px; }
+      .clube-p { font-size: 16px; }
+      .section-title { font-size: clamp(32px, 8.5vw, 48px); }
+      .section-desc { font-size: 16px; }
+      .hero-sub { font-size: 15px; letter-spacing: 0.22em; }
       /* Aside compacto: remove linhas espaçadoras, reduz tamanhos */
       .clube-ano { font-size: 48px; margin-bottom: 12px; }
       .clube-linha { display: none; }
@@ -2056,8 +2058,8 @@
 
       /* O que Oferecemos */
       #oferecemos { padding: 64px 24px; }
-      .tab-titulo { font-size: 26px; }
-      .tab-desc { font-size: 15px; }
+      .tab-titulo { font-size: 28px; }
+      .tab-desc { font-size: 16px; }
 
       /* Escola */
       #escola { padding: 64px 24px; }
@@ -2102,9 +2104,9 @@
       .rodape-col-nav { padding-left: 0; border-left: none; border-top: 1px solid rgba(26,74,32,0.1); padding-top: 28px; }
       .rodape-bottom { padding: 20px 0; }
 
-      /* Eyebrows — letter-spacing 0.55em distorce em fontes pequenas no mobile */
-      .section-eyebrow { font-size: 10px; letter-spacing: 0.32em; }
-      .clube-eyebrow { font-size: 11px; letter-spacing: 0.32em; }
+      /* Eyebrows */
+      .section-eyebrow { font-size: 11px; letter-spacing: 0.28em; }
+      .clube-eyebrow { font-size: 12px; letter-spacing: 0.28em; }
 
       /* Blog */
       .blog-bar { padding: 0 20px; height: 70px; }
