@@ -1883,6 +1883,200 @@
     }
 
     /* ══════════════════════════════════════════
+       HAMBURGER + MENU MOBILE
+    ══════════════════════════════════════════ */
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px; height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--green);
+      transition: transform 0.35s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    #nav-mobile {
+      position: fixed;
+      inset: 0;
+      z-index: 8900;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 40px 28px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-16px);
+      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    #nav-mobile.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    .nav-mobile-fechar {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 40px; height: 40px;
+      background: none;
+      border: 1px solid rgba(26,74,32,0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-60);
+    }
+    .nav-mobile-fechar svg { width: 16px; height: 16px; }
+
+    .nav-mobile-lista {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .nav-mobile-link {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+      text-align: center;
+    }
+    .nav-mobile-link:hover { color: var(--gold); }
+
+    .nav-mobile-cta {
+      display: inline-block;
+      background: var(--green);
+      color: rgba(242,237,228,0.92);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      transition: background 0.3s ease;
+    }
+    .nav-mobile-cta:hover { background: var(--green-dk); }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVO MOBILE — GLOBAL
+    ══════════════════════════════════════════ */
+
+    @media (max-width: 768px) {
+
+      /* Nav */
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none !important; }
+      nav { height: 80px !important; padding: 0 24px !important; }
+      nav.scrolled { height: 64px !important; }
+      .nav-logo img { height: 56px !important; }
+      nav.scrolled .nav-logo img { height: 44px !important; }
+      .nav-brand { font-size: 14px !important; letter-spacing: 0.14em !important; }
+
+      /* Hero */
+      #hero { min-height: 100svh; padding-top: 80px; }
+      .hero-img-wrap { width: 100%; top: 0; height: 100%; opacity: 0.55; }
+      .hero-img-fade {
+        background:
+          linear-gradient(to right, var(--cream) 0%, var(--cream) 8%, rgba(232,224,208,0.85) 40%, transparent 100%),
+          linear-gradient(to top, var(--cream) 0%, transparent 35%),
+          linear-gradient(to bottom, var(--cream) 0%, transparent 20%);
+      }
+      .hero-content {
+        padding: 0 24px 80px;
+        max-width: 100%;
+        text-align: left;
+      }
+      .hero-title { font-size: clamp(48px, 14vw, 72px); }
+      .hero-rule { justify-content: flex-start; }
+      .hero-actions { justify-content: flex-start; }
+      .scroll-hint { display: none; }
+
+      /* Preloader */
+      .pl-logo { width: 220px; }
+
+      /* O Clube */
+      #clube { padding: 72px 24px 56px; }
+      .clube-inner { gap: 32px; }
+      .clube-ano { font-size: 64px; }
+      .clube-titulo { font-size: 32px; }
+      .clube-p { font-size: 15px; }
+      .clube-stats { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+      .clube-stat { min-width: 120px; }
+
+      /* O que Oferecemos */
+      #oferecemos { padding: 64px 24px; }
+      .tab-titulo { font-size: 26px; }
+      .tab-desc { font-size: 15px; }
+
+      /* Escola */
+      #escola { padding: 64px 24px; }
+      .escola-header { margin-bottom: 48px; }
+
+      /* História */
+      #historia { padding: 64px 24px; }
+
+      /* Serviços */
+      #servicos { padding: 64px 24px; }
+
+      /* Boutique */
+      #boutique { padding: 48px 24px 80px; }
+      .boutique-header { margin-bottom: 40px; }
+      .boutique-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .produto-info { padding: 16px 16px 20px; }
+      .produto-nome { font-size: 16px; }
+
+      /* Atletas */
+      #atletas { padding: 64px 24px 56px; }
+      .atletas-header { margin-bottom: 48px; }
+      .fan-stage { height: 380px; }
+      .fan-card { width: 220px; height: 300px; margin-left: -110px; }
+
+      /* Seção separadores */
+      .sep-band { padding: 36px 0; }
+
+      /* Rodapé */
+      #rodape { padding: 56px 24px 0; }
+      .rodape-inner { gap: 32px; padding-bottom: 40px; }
+      .rodape-col-contato,
+      .rodape-col-nav { padding-left: 0; border-left: none; border-top: 1px solid rgba(26,74,32,0.1); padding-top: 28px; }
+      .rodape-bottom { padding: 20px 0; }
+
+      /* Blog */
+      .blog-bar { padding: 0 20px; height: 70px; }
+      .blog-bar-titulo { font-size: 24px; }
+      .blog-voltar-site { font-size: 10px; letter-spacing: 0.12em; }
+      .blog-conteudo { padding: 40px 20px; }
+      .blog-card-titulo { font-size: 20px; }
+      .blog-post-titulo { font-size: clamp(26px, 7vw, 40px); }
+      .blog-post-corpo { font-size: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(40px, 13vw, 60px); }
+      .boutique-grid { grid-template-columns: 1fr; }
+      .fan-card { width: 200px; height: 280px; margin-left: -100px; }
+      .fan-stage { height: 340px; }
+      .nav-mobile-link { font-size: 28px; }
+      .section-title { font-size: clamp(28px, 8vw, 40px); }
+    }
+
+    /* ══════════════════════════════════════════
        KEYFRAMES
     ══════════════════════════════════════════ */
 
@@ -1952,7 +2146,26 @@
       <li><a href="#contato">Contato</a></li>
       <li><a href="https://wa.me/5544999198845?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20de%20equita%C3%A7%C3%A3o." target="_blank" class="nav-cta">Aula Experimental</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Menu mobile -->
+  <div id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu">
+    <button class="nav-mobile-fechar" id="nav-mobile-fechar" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <nav class="nav-mobile-lista">
+      <a href="#clube"      class="nav-mobile-link">O Clube</a>
+      <a href="#oferecemos" class="nav-mobile-link">O que Oferecemos</a>
+      <a href="#boutique"   class="nav-mobile-link">Boutique</a>
+      <a href="#atletas"    class="nav-mobile-link">Atletas</a>
+      <a href="#blog"       class="nav-mobile-link" id="nav-mobile-blog">Blog</a>
+      <a href="#contato"    class="nav-mobile-link">Contato</a>
+    </nav>
+    <a href="https://wa.me/5544999198845?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20de%20equita%C3%A7%C3%A3o." target="_blank" class="nav-mobile-cta">Aula Experimental</a>
+  </div>
 
   <!-- ══ HERO ══ -->
   <section id="hero">
@@ -2539,6 +2752,47 @@
       nav.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
 
+    // ── Menu mobile ─────────────────────────────────────────
+    (function () {
+      const hamburger  = document.getElementById('nav-hamburger');
+      const menuMobile = document.getElementById('nav-mobile');
+      const btnFechar  = document.getElementById('nav-mobile-fechar');
+      const blogMobile = document.getElementById('nav-mobile-blog');
+      if (!hamburger || !menuMobile) return;
+
+      function abrirMenu() {
+        hamburger.classList.add('open');
+        menuMobile.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function fecharMenu() {
+        hamburger.classList.remove('open');
+        menuMobile.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', () =>
+        menuMobile.classList.contains('open') ? fecharMenu() : abrirMenu()
+      );
+      btnFechar.addEventListener('click', fecharMenu);
+
+      menuMobile.querySelectorAll('.nav-mobile-link:not(#nav-mobile-blog), .nav-mobile-cta').forEach(l =>
+        l.addEventListener('click', fecharMenu)
+      );
+
+      // Blog link no menu mobile abre o overlay do blog
+      if (blogMobile) {
+        blogMobile.addEventListener('click', e => {
+          e.preventDefault();
+          fecharMenu();
+          setTimeout(() => {
+            const blogLink = document.querySelector('a[href="#blog"]');
+            if (blogLink) blogLink.click();
+          }, 380);
+        });
+      }
+    })();
+
     // ── Blog overlay ────────────────────────────────────────
     (function () {
       const overlay  = document.getElementById('blog-overlay');
@@ -2721,7 +2975,8 @@
       }
 
       function layout(dragDx) {
-        const spacing = CFG.W * (1 - CFG.OVERLAP);
+        const cardW   = cards[0] ? cards[0].offsetWidth : CFG.W;
+        const spacing = cardW * (1 - CFG.OVERLAP);
         const maxOff  = Math.floor(N / 2);
         const stepDeg = maxOff > 0 ? CFG.SPREAD / maxOff : 0;
 
