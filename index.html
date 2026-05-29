@@ -1889,82 +1889,96 @@
     .nav-hamburger {
       display: none;
       flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 40px; height: 40px;
+      gap: 8px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 8px;
+      padding: 10px;
       flex-shrink: 0;
     }
     .nav-hamburger span {
       display: block;
-      width: 22px; height: 1.5px;
+      height: 1px;
       background: var(--green);
-      transition: transform 0.35s ease, opacity 0.25s ease;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), width 0.3s ease;
       transform-origin: center;
     }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-hamburger span:nth-child(1) { width: 28px; }
+    .nav-hamburger span:nth-child(2) { width: 18px; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { width: 28px; transform: translateY(-4.5px) rotate(-45deg); }
 
     #nav-mobile {
       position: fixed;
-      inset: 0;
-      z-index: 9100;
+      top: 80px;
+      left: 0; right: 0;
+      z-index: 8900;
       background: var(--cream);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      border-bottom: 1px solid rgba(26,74,32,0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-16px);
-      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(-6px);
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     #nav-mobile.open { opacity: 1; pointer-events: all; transform: translateY(0); }
 
     .nav-mobile-inner {
-      min-height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 100px 28px 56px;
-      gap: 4px;
+      padding: 28px 24px 36px;
     }
 
-    .nav-mobile-fechar {
-      position: absolute;
-      top: 24px; right: 24px;
-      width: 40px; height: 40px;
-      background: none;
-      border: 1px solid rgba(26,74,32,0.2);
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-60);
+    .nav-mobile-fechar { display: none; }
+
+    .nav-mobile-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      text-decoration: none;
     }
-    .nav-mobile-fechar svg { width: 16px; height: 16px; }
+    .nav-mobile-logo img {
+      height: 52px;
+      width: auto;
+    }
+    .nav-mobile-logo-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+
+    .nav-mobile-sep {
+      width: 100%;
+      height: 1px;
+      background: rgba(26,74,32,0.1);
+      margin-bottom: 24px;
+    }
 
     .nav-mobile-lista {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 4px;
+      align-items: stretch;
+      width: 100%;
       margin-bottom: 28px;
     }
     .nav-mobile-link {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 7vw, 32px);
+      font-size: 19px;
       font-weight: 400;
-      color: var(--green);
+      color: var(--text);
       text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.3s ease;
+      letter-spacing: 0.04em;
+      padding: 13px 0;
       text-align: center;
-      line-height: 1.4;
-      padding: 4px 0;
+      border-bottom: 1px solid rgba(26,74,32,0.08);
+      transition: color 0.25s ease;
     }
+    .nav-mobile-link:first-child { border-top: 1px solid rgba(26,74,32,0.08); }
     .nav-mobile-link:hover { color: var(--gold); }
 
     .nav-mobile-cta {
@@ -1976,7 +1990,7 @@
       letter-spacing: 0.28em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 14px 32px;
+      padding: 14px 36px;
       transition: background 0.3s ease;
     }
     .nav-mobile-cta:hover { background: var(--green-dk); }
@@ -2093,7 +2107,6 @@
     @media (max-width: 480px) {
       .hero-title { font-size: clamp(40px, 13vw, 60px); }
       .boutique-grid { grid-template-columns: 1fr; }
-      .nav-mobile-link { font-size: 28px; }
       .section-title { font-size: clamp(28px, 8vw, 40px); }
       .fan-card { width: 78vw; margin-left: calc(78vw / -2); height: calc(78vw * 1.42); }
     }
@@ -2168,16 +2181,19 @@
       <li><a href="https://wa.me/5544999198845?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20aula%20experimental%20de%20equita%C3%A7%C3%A3o." target="_blank" class="nav-cta">Aula Experimental</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
+      <span></span><span></span>
     </button>
   </nav>
 
   <!-- Menu mobile -->
   <div id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu">
-    <button class="nav-mobile-fechar" id="nav-mobile-fechar" aria-label="Fechar menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+    <button class="nav-mobile-fechar" id="nav-mobile-fechar" aria-label="Fechar menu"></button>
     <div class="nav-mobile-inner">
+      <a href="#" class="nav-mobile-logo">
+        <img src="identidade/logo.png" alt="Hipismo Maringá">
+        <span class="nav-mobile-logo-nome">Hipismo Maringá</span>
+      </a>
+      <div class="nav-mobile-sep"></div>
       <nav class="nav-mobile-lista">
         <a href="#clube"      class="nav-mobile-link">O Clube</a>
         <a href="#oferecemos" class="nav-mobile-link">O que Oferecemos</a>
@@ -2749,8 +2765,11 @@
     });
 
     const nav = get('nav');
+    const menuMobile = document.getElementById('nav-mobile');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      nav.classList.toggle('scrolled', scrolled);
+      if (menuMobile) menuMobile.style.top = scrolled ? '64px' : '80px';
     }, { passive: true });
 
     // ── Menu mobile ─────────────────────────────────────────
@@ -2764,12 +2783,10 @@
       function abrirMenu() {
         hamburger.classList.add('open');
         menuMobile.classList.add('open');
-        document.body.style.overflow = 'hidden';
       }
       function fecharMenu() {
         hamburger.classList.remove('open');
         menuMobile.classList.remove('open');
-        document.body.style.overflow = '';
       }
 
       hamburger.addEventListener('click', () =>
@@ -2777,7 +2794,7 @@
       );
       btnFechar.addEventListener('click', fecharMenu);
 
-      menuMobile.querySelectorAll('.nav-mobile-link:not(#nav-mobile-blog), .nav-mobile-cta').forEach(l =>
+      menuMobile.querySelectorAll('.nav-mobile-link:not(#nav-mobile-blog), .nav-mobile-cta, .nav-mobile-logo').forEach(l =>
         l.addEventListener('click', fecharMenu)
       );
 
